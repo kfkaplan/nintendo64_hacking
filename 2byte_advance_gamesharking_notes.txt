@@ -1,0 +1,312 @@
+Nintendo 64 Gameshark Two Byte Code Logic
+
+I am going to describe a way to create complex gameshark codes using two adjacent bits in the Nintendo 64 memory.  The Gameshark can query and modify either a single byte in memory with the D0, D2, 80, & 88 codes or modify two bytes that are adjacent to each other in memory with the D1, D3, 81, & 89 codes.  Find two unused bytes in memory that are right next to each other which can be used for this purpose.   Let us call byte 1 80XXXXXA and byte 2 80XXXXXB.  Together they are 81XXXXXA.
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Event trigger bytes:
+
+Gameshark codes run in an infinite loop, constantly checking or overwriting memory locations in RAM.  Any conditional D0 or D1 code will constantly be true and execute a large number of times during the infinite looping process when the condition is met.  The goal here is to execute RAM writes when a condition is met only ONCE AFTER the condition is met. One byte acts as an indicator that "This event has happened" and the second byte acts an indicator that "this event is happening now".   These types of codes can be made arbitrarily long ranging from a single event with a single 
+
+In the following example we initialize byte 2 to always be 00 but if a condition (or conditions) are met, it gets set to 01 along with byte 1
+
+80XXXXXB 0000 //Byte 2 = 00, event is not occuring
+D0YYYYYY ZZZZ //Check if some condition is met
+81XXXXXA 0101 //If some condition is met, byte 1 = 01, byte 2 = 01
+D0YYYYYY ZZZZ //Check if some other condition is met
+81XXXXXA 0101 //If some other condition is met, byte 1 = 01, byte 2 = 01
+...and so on and so forth until all possible conditions are checked
+
+Since Gameshark codes run in an infinite loop, once none of the conditions are met, byte 1 will still equal 01 while byte 2 will revert back to 00.  We can then use a two byte query (D1) to execute one or more RAM writes before setting byte 1 back to 00.
+
+D1XXXXXA 0100 //If byte 1 == 01 and byte 2 == 00, event has occurred but is no longer occurring
+80YYYYYY ZZZZ //Execute one RAM write
+D1XXXXXA 0100 //If byte 1 == 01 and byte 2 == 00, event has occurred but is no longer occurring
+80YYYYYY ZZZZ //Execute a second RAM write
+...and so on and so forth until all possible RAM writes are executed
+D1XXXXXA 0100 //If byte 1 == 01 and byte 2 == 00, event has occurred but is no longer occurring
+80XXXXXA 0100 //Set byte 1 = 00, can now trigger event again
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The two byte timer:
+
+Similar to the event trigger type code describe above, two adjacent bytes can be used as a counter or timer.  Byte will act to track if the counter has been incremented or not.  The trigger byte starts at 01 and when the counter is incremented, it is set to 00.  The second byte stores the value of the counter itself. The counter can be between any minimum and maximum desired values (or any predefined sequence of values.  In the example below, it counts from 00 to 09 for a total of ten possible states.
+    
+    80AAAAAA 0001 //Trigger start on, can also modify it so trigger set to 01 during a specific event
+    D1AAAAAA  0100 //If sequence is triggered and counter == 00 
+    81AAAAAA  0001 //Turn trigger off and set counter = 01
+    D1AAAAAA  0101 //If sequence is triggered and counter == 01
+    81AAAAAA  0002 //Turn trigger off and set counter = 02
+    D1AAAAAA  0102 //If sequence is triggered and counter == 02
+    81AAAAAA  0003 //Turn trigger off and set counter = 03
+    D1AAAAAA  0103 //If sequence is triggered and counter == 03
+    81AAAAAA 0004 //Turn trigger off and set counter = 04
+    D1AAAAAA  0104 //If sequence is triggered and counter == 04
+    81AAAAAA 0005 //Turn trigger off and set counter = 05
+    D1AAAAAA  0105 //If sequence is triggered and counter == 05
+    81AAAAAA 0006 //Turn trigger off and set counter = 06
+    D1AAAAAA 0106 //If sequence is triggered and counter == 06
+    81AAAAAA  0007 //Turn trigger off and set counter = 07
+    D1AAAAAA  0107 //If sequence is triggered and counter == 07
+    81AAAAAA 0008 //Turn trigger off and set counter = 08
+    D1AAAAAA  0108 //If sequence is triggered and counter == 08
+    81AAAAAA  0009 //Turn trigger off and set counter = 09
+    D1AAAAAA  0109 //If sequence is triggered and counter == 09
+    81AAAAAA  0000 //Turn trigger off and set counter = 00 to loop back to the beginning
+
+The counter can act as a random number generator and be queried with two or more conditional codes as follows
+
+    D0XXXXXX 00YY //If some event occurs in the game
+    D0AAAAAB 0005 //If counter == 5, (a 1/10 chance of occurring)
+    80DDDDDD 00EE  //Do something
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The simple (1 byte, 8 bit) counter:
+
+Count to 4 example:
+
+Requires 2 bytes
+
+Byte 1 stores the counter value (00, 01, 02, 03, or 04)
+Byte 2 == 00, do nothing
+Byte 2 == 02, decrement counter
+Byte 2 == 01, incriment counter
+
+
+//Decrement counter
+D1XXXXXA 0102
+81XXXXXA 0000
+D1XXXXXA 0202
+81XXXXXA 0100
+D1XXXXXA 0302
+81XXXXXA 0200
+D1XXXXXA 0402
+81XXXXXA 0300
+//Increment counter
+D1XXXXXA 0001
+81XXXXXA 0100
+D1XXXXXA 0101
+81XXXXXA 0200
+D1XXXXXA 0201
+81XXXXXA 0300
+D1XXXXXA 0103
+81XXXXXA 0004
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The complex (2 byte, 16 bit) counter:
+
+
+Requires 3 bytes
+
+Base 4 example (can count up to 16):
+
+Byte 1 stores the counter's first digit (00, 01, 02, 03, or 04)
+Byte 2 stores the counter's second digit (00, 01, 02, 03, or 04)
+Byte 3 == 00, do nothing
+Byte 3 == 02, decrement counter
+Byte 3 == 01, increment counter
+
+
+Byte 1 81XXXXXA
+Byte 2 81XXXXXB
+
+
+0000 = 0
+0001 = 1
+0002 = 2
+0003 = 3
+0100 = 4
+0101 = 5
+0102 = 6
+0103 = 7
+0200 = 8
+0201 = 9
+0202 = 10
+0203 = 11
+0300 = 12
+0301 = 13
+0302 = 14
+0303 = 15
+0400 = 16
+
+//Decrement counter
+D1XXXXXB 0002
+81XXXXXB FF00
+D1XXXXXB 0102
+81XXXXXB 0000
+D1XXXXXB 0202
+81XXXXXB 0100
+D1XXXXXB 0302
+81XXXXXB 0200
+//Increment counter
+D1XXXXXB 0001
+81XXXXXB 0100
+D1XXXXXB 0101
+81XXXXXB 0200
+D1XXXXXB 0201
+81XXXXXB 0300
+D1XXXXXB 0103
+81XXXXXB 0400
+//Decrement 2nd digit
+D1XXXXXA 01FF
+81XXXXXA 0003
+D1XXXXXA 02FF
+81XXXXXA 0103
+D1XXXXXA 03FF
+81XXXXXA 0203
+D1XXXXXA 04FF
+81XXXXXA 0303
+///Increment 2nd digit
+D1XXXXXA 0004
+81XXXXXA 0100
+D1XXXXXA 0104
+81XXXXXA 0200
+D1XXXXXA 0204
+81XXXXXA 0300
+D1XXXXXA 0304
+81XXXXXA 0400
+
+OLD VERSION BELOW: PROBABLY CAN DELETE
+
+//Decrement counter
+DXYYYYYY NNNN //If condition exists to decrement counter
+D0AAAAAD 0000 //If counter is equal to this value
+80AAAAAD 00FF //Reduce counter by 1
+D1AAAAAA NNNN
+D0AAAAAD 0001
+80AAAAAD 0000
+D1AAAAAA NNNN
+D0AAAAAD 0002
+80AAAAAD 0001
+D1AAAAAA 1000
+D0AAAAAD 0003
+80AAAAAD 0002
+//Increment counter
+DXYYYYYY ZZZZ //If condition exists has occurred but no longer in progress
+D0AAAAAD 0003 //If HP is equal to this value
+80AAAAAD 0004 //Increase HP by 1
+D1AAAAAA 2000
+D0AAAAAD 0002
+80AAAAAD 0003
+D1AAAAAA 2000
+D0AAAAAD 0001
+80AAAAAD 0002
+D1AAAAAA 2000
+D0AAAAAD 0000
+80AAAAAD 0001
+//Increase 2nd digit
+D1AAAAAC 0005
+81AAAAAC 0100
+D1AAAAAC 0105
+81AAAAAC 0200
+D1AAAAAC 0105
+81AAAAAC 0200
+D1AAAAAC 0205
+81AAAAAC 0300
+D1AAAAAC 0305
+81AAAAAC 0400
+//Lower 2nd digit
+D1AAAAAC 01FF
+80AAAAAC 0003
+D1AAAAAC 02FF
+80AAAAAC 0103
+D1AAAAAC 03FF
+80AAAAAC 0203
+D1AAAAAC 04FF
+80AAAAAC 0303
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Complex event sequence scripting
+
+
+EXAMPLE RANDOM SEQUENCE EVENT
+
+Find 2 bytes that are unused next to each other to use as the sequence trigger and counter
+
+For example
+Sequence trigger 801965F0 fires ~every 5 seconds
+The next byte 801965F2 is the sequence counter
+
+Random event sequence trigger every ~5 seconds
+```
+D02BA290 0001 //If RNG == 01
+801965F0 0001 //Sequence trigger byte set to 01
+D02BA290 0002 //If RNG == 02
+801965F0 0001 //Sequence trigger byte set to 01
+````
+Check sequence 2 byte pair for trigger and counter and press Z at desired intervals
+````
+D11965F0  0102 //f ~10 seconds have passed
+80196504 0020 //Press Z for P1
+D11965F0  0103 //If ~5 seconds have passed
+80196504 0020 //Press Z for P1
+D11965F0  0105 //If ~10 seconds have passed
+80196504 0020 //Press Z for P1
+D11965F0  0108 //If ~15 seconds have passed
+80196504 0020 //Press Z for P1
+D11965F0  0109 //If ~5 seconds have passed
+80196504 0020 //Press Z for P1
+```
+Increment sequence counter and reset trigger byte to 00
+```
+D11965F0  0100 //If sequence is triggered and counter == 00 
+811965F0  0001 //Turn trigger off and set counter = 01
+D11965F0  0101 //If sequence is triggered and counter == 01
+811965F0  0002 //Turn trigger off and set counter = 02
+D11965F0  0102 //If sequence is triggered and counter == 02
+811965F0  0003 //Turn trigger off and set counter = 03
+D11965F0  0103/ /If sequence is triggered and counter == 03
+811965F0  0004 //Turn trigger off and set counter = 04
+D11965F0  0104 //If sequence is triggered and counter == 04
+811965F0  0005 //Turn trigger off and set counter = 05
+D11965F0  0105 //If sequence is triggered and counter == 05
+811965F0  0006 //Turn trigger off and set counter = 06
+D11965F0  0106 //If sequence is triggered and counter == 06
+811965F0  0007 //Turn trigger off and set counter = 07
+D11965F0  0107 //If sequence is triggered and counter == 07
+811965F0  0008 //Turn trigger off and set counter = 08
+D11965F0  0108 //If sequence is triggered and counter == 08
+811965F0  0009 //Turn trigger off and set counter = 09
+D11965F0  0108 //If sequence is triggered and counter == 09
+811965F0  0000 //Turn trigger off and set counter = 00
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Table of RAM (D0 & D1) query codes
+
+1 byte (8 bit) query
+D0YYYYY0 00ZZ
+
+2 byte (16 bit) query
+D1YYYYY0 ZZZZ
+
+3 byte (24 bit) query
+D1YYYYY0 ZZZZ
+D0YYYYY2 00ZZ
+
+4 byte (32 bit) query
+D1YYYYY0 ZZZZ
+D1YYYYY2 ZZZZ
+
+8 byte (64 bit!) query
+D1YYYYY0 ZZZZ
+D1YYYYY2 ZZZZ
+D1YYYYY4 ZZZZ
+D1YYYYY6 ZZZZ
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+12 bit counter????  Will need to thnk abou this more
+
+
+
