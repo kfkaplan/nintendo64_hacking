@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Mario Kart 64 (U/NTSC) Cup Customizer v0.1</h2>
+
+<script>
+	function clickMe()
+	{
+		code = ''
+		if (document.mushroomCupCourseSelect.course1.value != '08')
+			{code += '800F2BB5 00'+document.mushroomCupCourseSelect.course1.value+'\n'}
+		if (document.mushroomCupCourseSelect.course2.value != '09')
+			{code += '800F2BB7 00'+document.mushroomCupCourseSelect.course2.value+'\n'}
+		if (document.mushroomCupCourseSelect.course3.value != '06')
+			{code += '800F2BB9 00'+document.mushroomCupCourseSelect.course3.value+'\n'}
+		if (document.mushroomCupCourseSelect.course4.value != '0B')
+			{code += '800F2BBB 00'+document.mushroomCupCourseSelect.course4.value+'\n'}
+
+		if (document.flowerCupCourseSelect.course1.value != '0A')
+			{code += '800F2BBD 00'+document.flowerCupCourseSelect.course1.value+'\n'}
+		if (document.flowerCupCourseSelect.course2.value != '05')
+			{code += '800F2BBF 00'+document.flowerCupCourseSelect.course2.value+'\n'}
+		if (document.flowerCupCourseSelect.course3.value != '01')
+			{code += '800F2BC1 00'+document.flowerCupCourseSelect.course3.value+'\n'}
+		if (document.flowerCupCourseSelect.course4.value != '00')
+			{code += '800F2BC3 00'+document.flowerCupCourseSelect.course4.value+'\n'}
+
+		if (document.starCupCourseSelect.course1.value != '0E')
+			{code += '800F2BC5 00'+document.starCupCourseSelect.course1.value+'\n'}
+		if (document.starCupCourseSelect.course2.value != '0C')
+			{code += '800F2BC7 00'+document.starCupCourseSelect.course2.value+'\n'}
+		if (document.starCupCourseSelect.course3.value != '07')
+			{code += '800F2BC9 00'+document.starCupCourseSelect.course3.value+'\n'}
+		if (document.starCupCourseSelect.course4.value != '02')
+			{code += '800F2BCB 00'+document.starCupCourseSelect.course4.value+'\n'}
+
+		if (document.specialCupCourseSelect.course1.value != '12')
+			{code += '800F2BCD 00'+document.specialCupCourseSelectv.course1.value+'\n'}
+		if (document.specialCupCourseSelect.course2.value != '04')
+			{code += '800F2BCF 00'+document.specialCupCourseSelect.course2.value+'\n'}
+		if (document.specialCupCourseSelect.course3.value != '03')
+			{code += '800F2BD1 00'+document.specialCupCourseSelect.course3.value+'\n'}
+		if (document.specialCupCourseSelect.course4.value != '0D')
+			{code += '800F2BD3 00'+document.specialCupCourseSelect.course4.value+'\n'}
+
+		document.makeCode.codeTextBox.value = code
+	}
+</script>
+
+
+
+<table>
+
+
+	<td>
+	Mushroom Cup
+	<form name='mushroomCupCourseSelect'>
+		<select name = 'course1' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08" selected="selected">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course2' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09" selected="selected">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course3' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06" selected="selected">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course4' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B" selected="selected">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+	</form>
+	</td>
+
+
+	<td>
+	Flower Cup
+	<form name='flowerCupCourseSelect'>
+		<select name = 'course1' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A" selected="selected">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course2' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05" selected="selected">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09" >Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course3' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01" selected="selected">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course4' onChange="stuff">
+			<option value="00" selected="selected">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+	</form>
+	</td>
+
+
+	<td>
+	Star Cup
+	<form name='starCupCourseSelect'>
+		<select name = 'course1' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E" selected="selected">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course2' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09" >Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C" selected="selected">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course3' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07" selected="selected">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course4' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02" selected="selected">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+	</form>
+	</td>
+
+
+	<td>
+	Special Cup
+	<form name='specialCupCourseSelect'>
+		<select name = 'course1' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12" selected="selected">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course2' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04" selected="selected">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09" >Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course3' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03" selected="selected">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+		<br>
+		<select name = 'course4' onChange="stuff">
+			<option value="00">Mario Raceway</option>
+			<option value="01">Choco Mountain</option>
+			<option value="02">Bowser's Castle</option>
+			<option value="03">Banshee Boardwalk</option>
+			<option value="04">Yoshi Valley</option>
+			<option value="05">Frappe Snowland</option>
+			<option value="06">Koopa Troopa Beach</option>
+			<option value="07">Royal Raceway</option>
+			<option value="08">Luigi Raceway</option>
+			<option value="09">Moo Moo Farm</option>
+			<option value="0A">Toad's Turnpike</option>
+			<option value="0B">Kalamari Desert</option>
+			<option value="0C">Sherbert Land</option>
+			<option value="0D" selected="selected">Rainbow Road</option>
+			<option value="0E">Wario Stadium</option>
+			<option value="0F">Block Fort</option>
+			<option value="10">Skyscraper</option>
+			<option value="11">Double Deck</option>
+			<option value="12">DK's Jungle Parkway</option>
+			<option value="13">Big Donut</option>
+		</select>
+	</form>
+	</td>
+
+</table>
+
+<form name="makeCode">
+
+	<br>
+	<button type="button" name='makeCodeButton' onClick="clickMe()">Create Gameshark Code</button>
+
+	<br>
+	<textarea name='codeTextBox' rows=16 cols=20></textarea>
+
+</form>
+
+</body>
+</html> 
+
