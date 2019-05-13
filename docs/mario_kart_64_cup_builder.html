@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<h2>Mario Kart 64 (U/NTSC) Cup Customizer v0.3</h2>
+<h2>Mario Kart 64 (U/NTSC) Cup Customizer v0.4</h2>
 
 
 
@@ -405,7 +405,13 @@
 
 <br>
 
-<form name="numberOfCourses">
+<form name="courseOptions">
+
+	<button type="button" name="defaultButton" onClick="clickDefaultCourses()">Default Courses</button>
+
+	<button type="button" name="randomizeButton" onClick="clickRandomizeCourses()">Randomize Courses</button>
+
+	<br><br>
 	Courses per cup
 	<select name=numberOfCoursesMenu onChange="selectCourseNumber()">
 			<option value=1>1</option>
@@ -425,6 +431,7 @@
 			<option value=15>15</option>
 			<option value=16>16 (all cups tour)</option>
 	</select>
+
 </form>
 
 
@@ -446,6 +453,7 @@ Cup course locations in ROM originally found by Rena Kunisaki (also known as Hyp
 Courses per cup code generalizes the all cups tour code created by Sean Sullivan: <a href="http://tasvideos.org/GameResources/N64/MarioKart64/Patches.html">http://tasvideos.org/GameResources/N64/MarioKart64/Patches.html</a>
 
 <h3>Version history:</h3>
+v0.4 (May 12, 2019) - Added buttons to return to the default course set and to randomize the courses.<br>
 v0.3 (May 12, 2019) - Fixed incompatibility with Firfox.<br>
 v0.2 (May 12, 2019) - Added ability to change number courses per cup.<br>
 v0.1 (May 12, 2019) - First version.  Allows you to modify the courses for each cup.
@@ -456,7 +464,7 @@ v0.1 (May 12, 2019) - First version.  Allows you to modify the courses for each 
 
 	function selectCourseNumber()
 	{
-		numberOfCourses = document.numberOfCourses.numberOfCoursesMenu.value
+		numberOfCourses = document.courseOptions.numberOfCoursesMenu.value
 		document.mushroomCupCourseSelect.course1.disabled = false //Default make all course select menus visible
 		document.mushroomCupCourseSelect.course2.disabled = false
 		document.mushroomCupCourseSelect.course3.disabled = false
@@ -543,7 +551,7 @@ v0.1 (May 12, 2019) - First version.  Allows you to modify the courses for each 
 		if (document.specialCupCourseSelect.course4.value != '0D' && document.specialCupCourseSelect.course4.disabled == false)
 			{code += '800F2BD3 00'+document.specialCupCourseSelect.course4.value+'\n'}
 
-		numberOfCourses = document.numberOfCourses.numberOfCoursesMenu.value //Modify number of courses per cup
+		numberOfCourses = document.courseOptions.numberOfCoursesMenu.value //Modify number of courses per cup
 		if (numberOfCourses > 4) {code += '8018EE09 0000\n'} //Force start at mushroom cup if course # > 4, to prevent glitches
 		if (numberOfCourses == 1){code += '8128E3C6 0000\n'} //Actually set the number of courses in a cup
 		if (numberOfCourses == 2){code += '8128E3C6 0001\n'}
@@ -563,7 +571,75 @@ v0.1 (May 12, 2019) - First version.  Allows you to modify the courses for each 
 
 		document.makeCode.codeTextBox.value = code
 	}
+
+
+	function getRandomInt(max) {
+	  return Math.floor(Math.random() * Math.floor(max));
+	}
+
+	function getRandomCourse() //Returns a random course
+	{
+		randomInt = getRandomInt(16)
+		if (randomInt == 0) {return "00"}
+		if (randomInt == 1) {return "01"}
+		if (randomInt == 2) {return "02"}
+		if (randomInt == 3) {return "03"}
+		if (randomInt == 4) {return "04"}
+		if (randomInt == 5) {return "05"}
+		if (randomInt == 6) {return "06"}
+		if (randomInt == 7) {return "07"}
+		if (randomInt == 8) {return "08"}
+		if (randomInt == 9) {return "09"}
+		if (randomInt == 10) {return "0A"}
+		if (randomInt == 11) {return "0B"}
+		if (randomInt == 12) {return "0C"}
+		if (randomInt == 13) {return "0D"}
+		if (randomInt == 14) {return "0E"}
+		if (randomInt == 15) {return "12"}
+	}
+
+	function clickRandomizeCourses()
+	{
+		document.mushroomCupCourseSelect.course1.value = getRandomCourse()
+		document.mushroomCupCourseSelect.course2.value = getRandomCourse()
+		document.mushroomCupCourseSelect.course3.value = getRandomCourse()
+		document.mushroomCupCourseSelect.course4.value = getRandomCourse()
+		document.flowerCupCourseSelect.course1.value = getRandomCourse()
+		document.flowerCupCourseSelect.course2.value = getRandomCourse()
+		document.flowerCupCourseSelect.course3.value = getRandomCourse()
+		document.flowerCupCourseSelect.course4.value = getRandomCourse()
+		document.starCupCourseSelect.course1.value = getRandomCourse()
+		document.starCupCourseSelect.course2.value = getRandomCourse()
+		document.starCupCourseSelect.course3.value = getRandomCourse()
+		document.starCupCourseSelect.course4.value = getRandomCourse()
+		document.specialCupCourseSelect.course1.value = getRandomCourse()
+		document.specialCupCourseSelect.course2.value = getRandomCourse()
+		document.specialCupCourseSelect.course3.value = getRandomCourse()
+		document.specialCupCourseSelect.course4.value = getRandomCourse()
+	}
+
+	function clickDefaultCourses()
+	{
+		document.mushroomCupCourseSelect.course1.value = "08"
+		document.mushroomCupCourseSelect.course2.value = "09"
+		document.mushroomCupCourseSelect.course3.value = "06"
+		document.mushroomCupCourseSelect.course4.value = "0B"
+		document.flowerCupCourseSelect.course1.value = "0A"
+		document.flowerCupCourseSelect.course2.value = "05"
+		document.flowerCupCourseSelect.course3.value = "01"
+		document.flowerCupCourseSelect.course4.value = "00"
+		document.starCupCourseSelect.course1.value = "0E"
+		document.starCupCourseSelect.course2.value = "0C"
+		document.starCupCourseSelect.course3.value = "07"
+		document.starCupCourseSelect.course4.value = "02"
+		document.specialCupCourseSelect.course1.value = "12"
+		document.specialCupCourseSelect.course2.value = "04"
+		document.specialCupCourseSelect.course3.value = "03"
+		document.specialCupCourseSelect.course4.value = "0D"
+	}
 </script>
+
+
 
 
 </body>
