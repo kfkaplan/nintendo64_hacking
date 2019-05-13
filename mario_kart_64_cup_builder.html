@@ -2,47 +2,116 @@
 <html>
 <body>
 
-<h2>Mario Kart 64 (U/NTSC) Cup Customizer v0.1</h2>
+<h2>Mario Kart 64 (U/NTSC) Cup Customizer v0.2</h2>
 
 <script>
+
+	function selectCourseNumber()
+	{
+		numberOfCourses = document.numberOfCourses.numberOfCoursesMenu.value
+		document.mushroomCupCourseSelect.course1.disabled = false //Default make all course select menus visible
+		document.mushroomCupCourseSelect.course2.disabled = false
+		document.mushroomCupCourseSelect.course3.disabled = false
+		document.mushroomCupCourseSelect.course4.disabled = false
+		document.flowerCupCourseSelect.course1.disabled = false
+		document.flowerCupCourseSelect.course2.disabled = false
+		document.flowerCupCourseSelect.course3.disabled = false
+		document.flowerCupCourseSelect.course4.disabled = false
+		document.starCupCourseSelect.course1.disabled = false
+		document.starCupCourseSelect.course2.disabled = false
+		document.starCupCourseSelect.course3.disabled = false
+		document.starCupCourseSelect.course4.disabled = false
+		document.specialCupCourseSelect.course1.disabled = false
+		document.specialCupCourseSelect.course2.disabled = false
+		document.specialCupCourseSelect.course3.disabled = false
+		document.specialCupCourseSelect.course4.disabled = false
+		if (numberOfCourses <= 3){ //Disable menus if less than 4 courses per cup
+			document.mushroomCupCourseSelect.course4.disabled = true
+			document.flowerCupCourseSelect.course4.disabled = true
+			document.starCupCourseSelect.course4.disabled =true
+			document.specialCupCourseSelect.course4.disabled = true
+		}
+		if (numberOfCourses <= 2){
+			document.mushroomCupCourseSelect.course3.disabled = true
+			document.flowerCupCourseSelect.course3.disabled = true
+			document.starCupCourseSelect.course3.disabled =true
+			document.specialCupCourseSelect.course3.disabled = true
+		}
+		if (numberOfCourses == 1){
+			document.mushroomCupCourseSelect.course2.disabled = true
+			document.flowerCupCourseSelect.course2.disabled = true
+			document.starCupCourseSelect.course2.disabled =true
+			document.specialCupCourseSelect.course2.disabled = true
+		}
+		if (numberOfCourses < 5 && numberOfCourses > 4) {document.flowerCupCourseSelect.course1.disabled = true}
+		if (numberOfCourses < 6 && numberOfCourses > 4) {document.flowerCupCourseSelect.course2.disabled = true}
+		if (numberOfCourses < 7 && numberOfCourses > 4) {document.flowerCupCourseSelect.course3.disabled = true}
+		if (numberOfCourses < 8 && numberOfCourses > 4) {document.flowerCupCourseSelect.course4.disabled = true}
+		if (numberOfCourses < 9 && numberOfCourses > 4) {document.starCupCourseSelect.course1.disabled = true}
+		if (numberOfCourses < 10 && numberOfCourses > 4) {document.starCupCourseSelect.course2.disabled = true}
+		if (numberOfCourses < 11 && numberOfCourses > 4) {document.starCupCourseSelect.course3.disabled = true}
+		if (numberOfCourses < 12 && numberOfCourses > 4) {document.starCupCourseSelect.course4.disabled = true}
+		if (numberOfCourses < 13 && numberOfCourses > 4) {document.specialCupCourseSelect.course1.disabled = true}
+		if (numberOfCourses < 14 && numberOfCourses > 4) {document.specialCupCourseSelect.course2.disabled = true}
+		if (numberOfCourses < 15 && numberOfCourses > 4) {document.specialCupCourseSelect.course3.disabled = true}
+		if (numberOfCourses < 16 && numberOfCourses > 4) {document.specialCupCourseSelect.course4.disabled = true}
+
+	}
+
+
 	function clickMe()
 	{
 		code = ''
-		if (document.mushroomCupCourseSelect.course1.value != '08')
+		if (document.mushroomCupCourseSelect.course1.value != '08' && document.mushroomCupCourseSelect.course1.disabled == false) //Modify courses
 			{code += '800F2BB5 00'+document.mushroomCupCourseSelect.course1.value+'\n'}
-		if (document.mushroomCupCourseSelect.course2.value != '09')
+		if (document.mushroomCupCourseSelect.course2.value != '09' && document.mushroomCupCourseSelect.course2.disabled == false)
 			{code += '800F2BB7 00'+document.mushroomCupCourseSelect.course2.value+'\n'}
-		if (document.mushroomCupCourseSelect.course3.value != '06')
+		if (document.mushroomCupCourseSelect.course3.value != '06' && document.mushroomCupCourseSelect.course3.disabled == false)
 			{code += '800F2BB9 00'+document.mushroomCupCourseSelect.course3.value+'\n'}
-		if (document.mushroomCupCourseSelect.course4.value != '0B')
+		if (document.mushroomCupCourseSelect.course4.value != '0B' && document.mushroomCupCourseSelect.course4.disabled == false)
 			{code += '800F2BBB 00'+document.mushroomCupCourseSelect.course4.value+'\n'}
-
-		if (document.flowerCupCourseSelect.course1.value != '0A')
+		if (document.flowerCupCourseSelect.course1.value != '0A' && document.flowerCupCourseSelect.course1.disabled == false)
 			{code += '800F2BBD 00'+document.flowerCupCourseSelect.course1.value+'\n'}
-		if (document.flowerCupCourseSelect.course2.value != '05')
+		if (document.flowerCupCourseSelect.course2.value != '05' && document.flowerCupCourseSelect.course2.disabled == false)
 			{code += '800F2BBF 00'+document.flowerCupCourseSelect.course2.value+'\n'}
-		if (document.flowerCupCourseSelect.course3.value != '01')
+		if (document.flowerCupCourseSelect.course3.value != '01' && document.flowerCupCourseSelect.course3.disabled == false)
 			{code += '800F2BC1 00'+document.flowerCupCourseSelect.course3.value+'\n'}
-		if (document.flowerCupCourseSelect.course4.value != '00')
+		if (document.flowerCupCourseSelect.course4.value != '00' && document.flowerCupCourseSelect.course4.disabled == false)
 			{code += '800F2BC3 00'+document.flowerCupCourseSelect.course4.value+'\n'}
-
-		if (document.starCupCourseSelect.course1.value != '0E')
+		if (document.starCupCourseSelect.course1.value != '0E' && document.starCupCourseSelect.course1.disabled == false)
 			{code += '800F2BC5 00'+document.starCupCourseSelect.course1.value+'\n'}
-		if (document.starCupCourseSelect.course2.value != '0C')
+		if (document.starCupCourseSelect.course2.value != '0C' && document.starCupCourseSelect.course2.disabled == false)
 			{code += '800F2BC7 00'+document.starCupCourseSelect.course2.value+'\n'}
-		if (document.starCupCourseSelect.course3.value != '07')
+		if (document.starCupCourseSelect.course3.value != '07' && document.starCupCourseSelect.course3.disabled == false)
 			{code += '800F2BC9 00'+document.starCupCourseSelect.course3.value+'\n'}
-		if (document.starCupCourseSelect.course4.value != '02')
+		if (document.starCupCourseSelect.course4.value != '02' && document.starCupCourseSelect.course4.disabled == false)
 			{code += '800F2BCB 00'+document.starCupCourseSelect.course4.value+'\n'}
-
-		if (document.specialCupCourseSelect.course1.value != '12')
+		if (document.specialCupCourseSelect.course1.value != '12' && document.specialCupCourseSelect.course1.disabled == false)
 			{code += '800F2BCD 00'+document.specialCupCourseSelect.course1.value+'\n'}
-		if (document.specialCupCourseSelect.course2.value != '04')
+		if (document.specialCupCourseSelect.course2.value != '04' && document.specialCupCourseSelect.course2.disabled == false)
 			{code += '800F2BCF 00'+document.specialCupCourseSelect.course2.value+'\n'}
-		if (document.specialCupCourseSelect.course3.value != '03')
+		if (document.specialCupCourseSelect.course3.value != '03' && document.specialCupCourseSelect.course3.disabled == false)
 			{code += '800F2BD1 00'+document.specialCupCourseSelect.course3.value+'\n'}
-		if (document.specialCupCourseSelect.course4.value != '0D')
+		if (document.specialCupCourseSelect.course4.value != '0D' && document.specialCupCourseSelect.course4.disabled == false)
 			{code += '800F2BD3 00'+document.specialCupCourseSelect.course4.value+'\n'}
+
+		numberOfCourses = document.numberOfCourses.numberOfCoursesMenu.value //Modify number of courses per cup
+		if (numberOfCourses > 4) {code += '8018EE09 0000\n'} //Force start at mushroom cup if course # > 4, to prevent glitches
+		if (numberOfCourses == 1){code += '8128E3C6 0000\n'} //Actually set the number of courses in a cup
+		if (numberOfCourses == 2){code += '8128E3C6 0001\n'}
+		if (numberOfCourses == 3){code += '8128E3C6 0002\n'}
+		if (numberOfCourses == 5){code += '8128E3C6 0004\n'}
+		if (numberOfCourses == 6){code += '8128E3C6 0005\n'}
+		if (numberOfCourses == 7){code += '8128E3C6 0006\n'}
+		if (numberOfCourses == 8){code += '8128E3C6 0007\n'}
+		if (numberOfCourses == 9){code += '8128E3C6 0008\n'}
+		if (numberOfCourses == 10){code += '8128E3C6 0009\n'}
+		if (numberOfCourses == 11){code += '8128E3C6 000A\n'}
+		if (numberOfCourses == 12){code += '8128E3C6 000B\n'}
+		if (numberOfCourses == 13){code += '8128E3C6 000C\n'}
+		if (numberOfCourses == 14){code += '8128E3C6 000D\n'}
+		if (numberOfCourses == 15){code += '8128E3C6 000E\n'}
+		if (numberOfCourses == 16){code += '8128E3C6 000F\n'}
 
 		document.makeCode.codeTextBox.value = code
 	}
@@ -56,7 +125,7 @@
 	<td>
 	Mushroom Cup
 	<form name='mushroomCupCourseSelect'>
-		<select name = 'course1' onChange="stuff">
+		<select name = 'course1'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -79,7 +148,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course2' onChange="stuff">
+		<select name = 'course2'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -102,7 +171,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course3' onChange="stuff">
+		<select name = 'course3'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -125,7 +194,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course4' onChange="stuff">
+		<select name = 'course4'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -154,7 +223,7 @@
 	<td>
 	Flower Cup
 	<form name='flowerCupCourseSelect'>
-		<select name = 'course1' onChange="stuff">
+		<select name = 'course1'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -177,7 +246,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course2' onChange="stuff">
+		<select name = 'course2'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -200,7 +269,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course3' onChange="stuff">
+		<select name = 'course3'>
 			<option value="00">Mario Raceway</option>
 			<option value="01" selected="selected">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -223,7 +292,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course4' onChange="stuff">
+		<select name = 'course4'>
 			<option value="00" selected="selected">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -252,7 +321,7 @@
 	<td>
 	Star Cup
 	<form name='starCupCourseSelect'>
-		<select name = 'course1' onChange="stuff">
+		<select name = 'course1'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -275,7 +344,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course2' onChange="stuff">
+		<select name = 'course2'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -298,7 +367,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course3' onChange="stuff">
+		<select name = 'course3'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -321,7 +390,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course4' onChange="stuff">
+		<select name = 'course4'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02" selected="selected">Bowser's Castle</option>
@@ -350,7 +419,7 @@
 	<td>
 	Special Cup
 	<form name='specialCupCourseSelect'>
-		<select name = 'course1' onChange="stuff">
+		<select name = 'course1'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -373,7 +442,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course2' onChange="stuff">
+		<select name = 'course2'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -396,7 +465,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course3' onChange="stuff">
+		<select name = 'course3'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -419,7 +488,7 @@
 			<option value="13">Big Donut</option>
 		</select>
 		<br>
-		<select name = 'course4' onChange="stuff">
+		<select name = 'course4'>
 			<option value="00">Mario Raceway</option>
 			<option value="01">Choco Mountain</option>
 			<option value="02">Bowser's Castle</option>
@@ -446,15 +515,53 @@
 
 </table>
 
-<form name="makeCode">
+<br>
 
+<form name="numberOfCourses">
+	Courses per cup
+	<select name=numberOfCoursesMenu onChange="selectCourseNumber()">
+			<option value=1>1</option>
+			<option value=2>2</option>
+			<option value=3>3</option>
+			<option value=4 selected="selected">4 (default)</option>
+			<option value=5>5</option>
+			<option value=6>6</option>
+			<option value=7>7</option>
+			<option value=8>8</option>
+			<option value=9>9</option>
+			<option value=10>10</option>
+			<option value=11>11</option>
+			<option value=12>12</option>
+			<option value=13>13</option>
+			<option value=14>14</option>
+			<option value=15>15</option>
+			<option value=16>16 (all cups tour)</option>
+	</select>
+</form>
+
+
+<form name="makeCode">
 	<br>
 	<button type="button" name='makeCodeButton' onClick="clickMe()">Create Gameshark Code</button>
 
 	<br>
-	<textarea name='codeTextBox' rows=16 cols=20></textarea>
+	<textarea name='codeTextBox' rows=20 cols=20></textarea>
 
 </form>
+
+
+<h3>Credits:</h3>
+This Mario Kart 64 Cup Customizer was created by Triclon.
+<br><br>
+Cup course locations in ROM originally found by Rena Kunisaki (also known as HyperHacker), translated to RAM by Triclon.
+<br><br>
+Courses per cup code genearlizes the all cups tour code created by Sean Sullivan: <a href="http://tasvideos.org/GameResources/N64/MarioKart64/Patches.html">http://tasvideos.org/GameResources/N64/MarioKart64/Patches.html</a>
+
+<h3>Version history:</h3>
+v0.2 (May 12, 2019) - Added ability to change number courses per cup.<br>
+v0.1 (May 12, 2019) - First version.  Allows you to modify the courses for each cup.
+
+
 
 </body>
 </html> 
