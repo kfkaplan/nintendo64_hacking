@@ -46,7 +46,7 @@ ASM from the EnHacklopedia section on Gameshark Code Handler Hacking: <a href=ht
 
 <br><br>
 Changelog:<br>
-v0.2 - Added support for D0, D1, D2, and D3 code types.
+v0.2 - Added support for D0, D1, D2, and D3 code types.<br>
 v0.1 - First attempt.  Supports 80 and 81 code types.  
 
 <script>
@@ -96,7 +96,7 @@ function convertGamesharkCodeToASM() //Function converts Gameshark codes found i
 			output += 'ORI $K0, 0x'+ memAddress.substring(2,6) + '\n'
 			output += 'LB $K0, 0x0000 ($K0)\n'
 			output += 'ADDIU $K1, $ZERO, 0x00'+codeValue+'\n'
-			outout += 'BNE $K0, $K1, 0x0024\n'
+			output += 'BNE $K0, $K1, 0x0024\n'
 
 		}
 		else if (codeType == 'D1')
@@ -105,7 +105,7 @@ function convertGamesharkCodeToASM() //Function converts Gameshark codes found i
 			output += 'ORI $K0, 0x'+ memAddress.substring(2,6) + '\n'
 			output += 'LH $K0, 0x0000 ($K0)\n'
 			output += 'ADDIU $K1, $ZERO, 0x'+codeValue+'\n'
-			outout += 'BNE $K0, $K1, 0x0024\n'
+			output += 'BNE $K0, $K1, 0x0024\n'
 		}
 		else if (codeType == 'D2')
 		{
@@ -113,7 +113,7 @@ function convertGamesharkCodeToASM() //Function converts Gameshark codes found i
 			output += 'ORI $K0, 0x'+ memAddress.substring(2,6) + '\n'
 			output += 'LB $K0, 0x0000 ($K0)\n'
 			output += 'ADDIU $K1, $ZERO, 0x00'+codeValue+'\n'
-			outout += 'BEQ $K0, $K1, 0x0024\n'
+			output += 'BEQ $K0, $K1, 0x0024\n'
 		}
 		else if (codeType == 'D3')
 		{
