@@ -786,7 +786,8 @@ v0.1 (May 12, 2019) - First version.  Allows you to modify the courses for each 
 	}
 
 	function decimalToHex(d) { //Returns 4 digit hex result
-	  var hex = Number(d).toString(16).toUpperCase();
+	  var hex = Number(65535 + 3  - d).toString(16).toUpperCase();
+	  if (hex.length > 4) {hex = hex.substr(1, 5)} //Signed 2 byte hex (chop off the 1 at the start of the string)
 	  hex = "0000".substr(0, 4 - hex.length) + hex;
 	  return hex;
 	}
